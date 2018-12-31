@@ -1,7 +1,11 @@
 import React from "react";
 import htm from "htm";
 const html = htm.bind(React.createElement);
+import Photoswipe from "photoswipe";
+import classes from "./product.css";
+
 
 export default function() {
-    return html`<h1>Product Root Component</h1>`
+    console.log(Photoswipe);
+    return html`<h1 class=${classes.root}>Product Root Component</h1>`
 };
