@@ -1,6 +1,6 @@
 const WebpackAssetsManifest = require('webpack-assets-manifest');
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
-const StatsPlugin = require('stats-webpack-plugin');
+const {StatsWriterPlugin} = require("webpack-stats-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const {resolve} = require("path");
 const mode = 'production';
@@ -45,7 +45,12 @@ module.exports = {
             output: 'asset-manifest.json',
             entrypoints: true
         }),
-        new StatsPlugin('stats.json'),
+        new StatsWriterPlugin({
+            fields: null,
+            transform(data, opts) {
+                return JSON.stringify(data.namedChunkGroups, null, 2);
+            }
+        }),
         // new BundleAnalyzerPlugin()
     ].filter(Boolean)
 };
