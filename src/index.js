@@ -19,6 +19,12 @@ class Loader extends React.Component {
                 default: return "Cms";
             }
         })();
+
+        const resolved = require.resolveWeak(`./roots/${root}`);
+        if (__webpack_modules__[resolved]) {
+            const Cmp = __webpack_require__(resolved).default;
+            return html`<${Cmp} />`
+        }
         const L = Loadable({
             loader: (props, props1) => {
                 return import(/* webpackChunkName: "[request]_root" */`./roots/${root}`).then(x => {

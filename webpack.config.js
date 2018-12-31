@@ -5,7 +5,7 @@ module.exports = {
         client: resolve(__dirname, 'src', 'index.js')
     },
     output: {
-        chunkFilename: "[name]-[chunkhash].js"
+        chunkFilename: "[name].js"
     },
     optimization: {
         splitChunks: {
